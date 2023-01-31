@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pokemon_challenge">
    <application
-        android:label="pokemon_challenge"
+        android:label="PokéChallenge"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
