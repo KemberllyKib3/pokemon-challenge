@@ -25,11 +25,15 @@ API a ser utilizada: https://pokeapi.co/
 
 ### Diferenciais:
 
-- [ ]  Adicionar uma Splash Screen
-- [ ]  Adicionar AppBar com ícone do aplicativo
+- [x]  Adicionar uma Splash Screen
+- [x]  Adicionar AppBar com ícone do aplicativo
 - [ ]  Utilizar paginação de 5 em 5
 - [ ]  Testes unitários
 - [ ]  Tratamento de erros
+
+### Extras:
+
+- [x]  Launcher Icon adaptativo
 
 ## Autor
 
