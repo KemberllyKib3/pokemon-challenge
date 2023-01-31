@@ -1,0 +1,63 @@
+name: pokemon_challenge
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  google_fonts: ^4.0.1
+  get_it: ^7.2.0
+  bloc: ^8.1.0
+  flutter_bloc: ^8.0.1
+  hive: ^2.2.1
+  hive_flutter: ^1.1.0
+  dio: ^4.0.6
+  cached_network_image: ^3.2.3
+  flutter_svg: ^1.1.6
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_launcher_icons: ^0.10.0
+
+  # flutter packages pub run flutter_native_splash:create
+  flutter_native_splash: ^2.2.14
+
+  # flutter packages pub run build_runner clean
+  # flutter packages pub run build_runner build --delete-conflicting-outputs
+  build_runner: ^2.3.3
+  hive_generator: ^2.0.0
+
+  flutter_lints: ^2.0.0
+
+# flutter packages pub run flutter_launcher_icons:main
+flutter_icons:
+  android: true
+  ios: true
+  image_path_ios: "assets/launcher/icon.png"
+  image_path_android: "assets/launcher/icon.png"
+  adaptive_icon_background: "assets/launcher/background.png"
+  adaptive_icon_foreground: "assets/launcher/foreground.png"
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/launcher/
+    - assets/svg/
+
+  fonts:
+    - family: Pocket Monk
+      fonts:
+        - asset: assets/fonts/Pocket Monk.otf
