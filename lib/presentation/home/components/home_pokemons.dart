@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_challenge/domain/entities/entities.dart';
 import 'package:pokemon_challenge/injector.dart';
+import 'package:pokemon_challenge/presentation/filter/bloc/filter.dart';
+import 'package:pokemon_challenge/presentation/filter/components/result_screen.dart';
 import 'package:pokemon_challenge/presentation/filter/filter_screen.dart';
 import 'package:pokemon_challenge/presentation/home/bloc/home.dart';
 import 'package:pokemon_challenge/presentation/home/components/custom_chip_filter_widget.dart';
@@ -53,16 +54,26 @@ class _HomePokemonsState extends State<HomePokemons> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomSearchFieldWidget(
-                  onSubmit: (search) {},
+                  onSubmit: (search) => WidgetsFunctions.push(
+                    context,
+                    (context) => BlocProvider<FilterBloc>(
+                      create: (context) => getIt<FilterBloc>(),
+                      child: ResultScreen(
+                        typeFilter: TypeFilter.search,
+                        search: search,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Row(
                   children: [
                     CustomChipFilterWidget(
-                      onTap: () => Navigator.push(
+                      onTap: () => WidgetsFunctions.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const FilterScreen(
+                        (context) => BlocProvider<FilterBloc>(
+                          create: (context) => getIt<FilterBloc>(),
+                          child: const FilterScreen(
                             typeFilter: TypeFilter.type,
                           ),
                         ),
@@ -71,10 +82,11 @@ class _HomePokemonsState extends State<HomePokemons> {
                     ),
                     const SizedBox(width: 10),
                     CustomChipFilterWidget(
-                      onTap: () => Navigator.push(
+                      onTap: () => WidgetsFunctions.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const FilterScreen(
+                        (context) => BlocProvider<FilterBloc>(
+                          create: (context) => getIt<FilterBloc>(),
+                          child: const FilterScreen(
                             typeFilter: TypeFilter.habitat,
                           ),
                         ),

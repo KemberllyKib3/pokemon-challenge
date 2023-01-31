@@ -8,20 +8,23 @@ Desafio consiste em desenvolver uma aplicação em Flutter para visualizar uma l
 API a ser utilizada: https://pokeapi.co/
 
 
+## Design e Protótipo
 
+[Figma](https://www.figma.com/file/nvipmmFf1dbLYm5FZQQq2G/Pok%C3%A9Challenge?t=BckVDC80JfLKh3Up-6)
+[Protótipo](https://www.figma.com/proto/nvipmmFf1dbLYm5FZQQq2G/Untitled?node-id=1%3A2&viewport=335%2C-86%2C0.31&scaling=scale-down&starting-point-node-id=5%3A63)
 
 
 ### Requisitos obrigatórios:
 
 - [x]  Exibir lista de Pokemons com fotos
-- [ ]  Detalhar Pokemon com todos os itens do endpoint
-- [ ]  Utilizar Hive para armazenar Pokemons Favoritos
-- [ ]  Exibir aba para Pokemons favoritados
-- [ ]  Permitir remover dos favoritos
-- [ ]  Manter o código limpo e de fácil compreensão
-- [ ]  Layout do app e responsividade
-- [ ]  Usar um gerenciamento de estados
-- [ ]  Utilizar Arquitetura Limpa
+- [x]  Detalhar Pokemon com todos os itens do endpoint
+- [x]  Utilizar Hive para armazenar Pokemons Favoritos
+- [x]  Exibir aba para Pokemons favoritados
+- [x]  Permitir remover dos favoritos
+- [x]  Manter o código limpo e de fácil compreensão
+- [x]  Layout do app e responsividade
+- [x]  Usar um gerenciamento de estados
+- [x]  Utilizar Arquitetura Limpa
 
 ### Diferenciais:
 
@@ -29,12 +32,14 @@ API a ser utilizada: https://pokeapi.co/
 - [x]  Adicionar AppBar com ícone do aplicativo
 - [x]  Utilizar paginação de 5 em 5
 - [ ]  Testes unitários
-- [ ]  Tratamento de erros
+- [x]  Tratamento de erros
 
 ### Extras:
 
 - [x]  Launcher Icon adaptativo
 - [x]  Campo de busca
+- [x]  Filtros 
+- [ ]  Drawer 
 
 ## Autor
 

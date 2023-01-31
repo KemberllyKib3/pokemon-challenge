@@ -1,15 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:pokemon_challenge/domain/entities/pokemon.dart';
 import 'package:pokemon_challenge/presentation/poke_details/bloc/poke_details.dart';
-import 'package:pokemon_challenge/presentation/poke_details/components/chip_widget.dart';
-import 'package:pokemon_challenge/presentation/poke_details/components/info_tags_scroll_widget.dart';
-import 'package:pokemon_challenge/presentation/poke_details/components/info_tags_wrap_widget.dart';
 import 'package:pokemon_challenge/presentation/poke_details/components/poke_details_body.dart';
-import 'package:pokemon_challenge/shared/shared.dart';
-import 'package:pokemon_challenge/shared/widgets/widgets_functions.dart';
 
 class PokeDetailsScreen extends StatefulWidget {
   final int id;

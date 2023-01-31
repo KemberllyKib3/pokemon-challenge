@@ -17,7 +17,7 @@ class PokemonServiceImpl implements PokemonService {
   }
 
   @override
-  Future<List<Types>> findManyTypes() async {
+  Future<List<String>> findManyTypes() async {
     final response = await ApiService().get(path: 'type');
     return ApiUtils.handleResponseList(response, mapTypes);
   }
@@ -29,15 +29,21 @@ class PokemonServiceImpl implements PokemonService {
   }
 
   @override
-  Future<List<Pokemon>> findManyByHabitat(String name) async {
-    final response = await ApiService().get(path: 'pokemon-habitat/$name');
+  Future<List<Pokemon>> findManyByHabitat(String habitat) async {
+    final response = await ApiService().get(path: 'pokemon-habitat/$habitat');
     return ApiUtils.handleResponseList(response, mapListPokemonFromHabitat);
   }
 
   @override
-  Future<List<Pokemon>> findManyByType(String name) async {
-    final response = await ApiService().get(path: 'type/$name');
+  Future<List<Pokemon>> findManyByType(String type) async {
+    final response = await ApiService().get(path: 'type/$type');
     return ApiUtils.handleResponseList(response, mapListPokemonFromType);
+  }
+
+  @override
+  Future<Pokemon> findManyByName(String name) async {
+    final response = await ApiService().get(path: 'pokemon/$name/');
+    return ApiUtils.handleResponse(response, mapPokemon);
   }
 
   Future<List<Pokemon>> mapListPokemon(dynamic data) async {
@@ -51,31 +57,44 @@ class PokemonServiceImpl implements PokemonService {
 
   Future<List<Pokemon>> mapListPokemonFromHabitat(dynamic data) async {
     List<Pokemon> list = [];
-    for (var item in data['pokemon_species']) {
+    for (var item in (data['pokemon_species'] as List).getRange(0, 15)) {
       final response = await ApiService().get(url: item['url']);
-      list.add(await mapPartialPokemon(response.data));
+      list.add(await mapPartialPokemonHabitat(response.data));
     }
     return list;
   }
 
   Future<List<Pokemon>> mapListPokemonFromType(dynamic data) async {
     List<Pokemon> list = [];
-    for (var item in data['pokemon']) {
+    for (var item in (data['pokemon'] as List).getRange(0, 15)) {
       final response = await ApiService().get(url: item['pokemon']['url']);
       list.add(await mapPartialPokemon(response.data));
     }
     return list;
   }
 
+  Future<Pokemon> mapPartialPokemonHabitat(dynamic data) async {
+    dynamic response =
+        await ApiService().get(url: data['varieties'][0]['pokemon']['url']);
+
+    return Pokemon(
+      id: data['id'],
+      name: data['name'],
+      imageUrl: response.data['sprites']['other']['official-artwork']
+          ['front_default'],
+      color: data['color']['name'],
+      isFavorite: false,
+    );
+  }
+
   Future<Pokemon> mapPartialPokemon(dynamic data) async {
-    final response = await ApiService().get(url: data['species']['url']);
-    final color = response.data['color']['name'];
+    dynamic response = await ApiService().get(url: data['species']['url']);
 
     return Pokemon(
       id: data['id'],
       name: data['name'],
       imageUrl: data['sprites']['other']['official-artwork']['front_default'],
-      color: color,
+      color: response.data['color']['name'],
       isFavorite: false,
     );
   }
@@ -120,9 +139,11 @@ class PokemonServiceImpl implements PokemonService {
     return moves;
   }
 
-  List<Types> mapTypes(dynamic data) {
+  List<String> mapTypes(dynamic data) {
     return (data['results'] as List)
-        .map((e) => Types(name: e['name']))
+        .map(
+          (e) => e['name'].toString(),
+        )
         .toList();
   }
 

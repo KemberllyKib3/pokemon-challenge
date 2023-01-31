@@ -6,8 +6,10 @@ import 'package:pokemon_challenge/data/repositories/pokemon_repository_impl.dart
 import 'package:pokemon_challenge/data/services/pokemon_service_impl.dart';
 import 'package:pokemon_challenge/domain/repositories/pokemon_repository.dart';
 import 'package:pokemon_challenge/domain/services/pokemon_service.dart';
+import 'package:pokemon_challenge/domain/usecases/filter_usecases.dart';
 import 'package:pokemon_challenge/domain/usecases/home_usecases.dart';
 import 'package:pokemon_challenge/domain/usecases/poke_details_usecases.dart';
+import 'package:pokemon_challenge/presentation/filter/bloc/filter.dart';
 import 'package:pokemon_challenge/presentation/home/bloc/home.dart';
 import 'package:pokemon_challenge/presentation/poke_details/bloc/poke_details_bloc.dart';
 
@@ -15,29 +17,25 @@ final GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
   // Blocs
-  getIt.registerFactory(() => HomeBloc(homeUsecases: getIt()));
-  getIt.registerFactory(() => PokeDetailsBloc(pokeDetailsUsecases: getIt()));
+  getIt
+    ..registerFactory(() => HomeBloc(homeUsecases: getIt()))
+    ..registerFactory(() => PokeDetailsBloc(pokeDetailsUsecases: getIt()))
+    ..registerFactory(() => FilterBloc(filterUsecases: getIt()))
 
-  // Services
-  getIt.registerFactory<PokemonService>(() => PokemonServiceImpl());
+    // Services
+    ..registerFactory<PokemonService>(() => PokemonServiceImpl())
 
-  // Repositories
-  getIt.registerFactory<PokemonRepository>(() => PokemonRepositoryImpl());
+    // Repositories
+    ..registerFactory<PokemonRepository>(() => PokemonRepositoryImpl())
 
-  // Datasources
-  getIt.registerFactory<PokemonDatasource>(() => PokemonDatasourceImpl());
+    // Datasources
+    ..registerFactory<PokemonDatasource>(() => PokemonDatasourceImpl())
 
-  // UseCases
-  getIt.registerFactory(
-    () => HomeUsecases(
-      pokemonRepository: getIt(),
-      pokemonService: getIt(),
-    ),
-  );
-  getIt.registerFactory(
-    () => PokeDetailsUsecases(
-      pokemonRepository: getIt(),
-      pokemonService: getIt(),
-    ),
-  );
+    // UseCases
+    ..registerFactory(
+        () => HomeUsecases(pokemonRepository: getIt(), pokemonService: getIt()))
+    ..registerFactory(() => PokeDetailsUsecases(
+        pokemonRepository: getIt(), pokemonService: getIt()))
+    ..registerFactory(() =>
+        FilterUsecases(pokemonRepository: getIt(), pokemonService: getIt()));
 }

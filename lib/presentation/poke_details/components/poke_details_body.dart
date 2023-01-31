@@ -8,6 +8,7 @@ import 'package:pokemon_challenge/presentation/poke_details/bloc/poke_details.da
 import 'package:pokemon_challenge/presentation/poke_details/components/chip_widget.dart';
 import 'package:pokemon_challenge/presentation/poke_details/components/info_tags_scroll_widget.dart';
 import 'package:pokemon_challenge/presentation/poke_details/components/info_tags_wrap_widget.dart';
+import 'package:pokemon_challenge/shared/helpers/helper_enums.dart';
 import 'package:pokemon_challenge/shared/helpers/helper_string.dart';
 import 'package:pokemon_challenge/shared/shared.dart';
 import 'package:pokemon_challenge/shared/widgets/widgets_functions.dart';
@@ -159,7 +160,7 @@ class _PokeDetailsBodyState extends State<PokeDetailsBody> {
                       .map(
                         (type) => Tag(
                           title: type.name,
-                          color: type.color,
+                          color: HelperEnums.color(type.name),
                         ),
                       )
                       .toList(),
