@@ -39,7 +39,7 @@ dev_dependencies:
 # flutter pub run flutter_native_splash:create
 flutter_native_splash:
   color: '#FFFFFF'
-  image: 'assets/images/logo.png'
+  image: 'assets/launcher/splash.png'
   android_gravity: center
 
 # flutter packages pub run flutter_launcher_icons:main

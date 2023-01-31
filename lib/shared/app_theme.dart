@@ -6,6 +6,10 @@ ThemeData buildTheme() {
   return ThemeData(
     primaryColor: AppColors.red,
     textTheme: GoogleFonts.sourceSansProTextTheme(),
+    iconTheme: const IconThemeData(
+      color: AppColors.white,
+      size: 25,
+    ),
     scaffoldBackgroundColor: AppColors.background,
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );

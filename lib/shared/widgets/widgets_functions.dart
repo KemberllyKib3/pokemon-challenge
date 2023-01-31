@@ -4,9 +4,8 @@ import 'package:pokemon_challenge/shared/shared.dart';
 class WidgetsFunctions {
   static AppBar bigAppBar(
     BuildContext context, {
-      IconButton? leading,
-    }
-  ) {
+    IconButton? leading,
+  }) {
     return AppBar(
       centerTitle: true,
       elevation: 0,
@@ -28,15 +27,25 @@ class WidgetsFunctions {
           ),
         ],
       ),
-      // bottom: PreferredSize(
-      //   preferredSize: const Size.fromHeight(70),
-      //   child: Container(
-      //     color: AppColors.red,
-      //     alignment: Alignment.centerLeft,
-      //     padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-      //     child:
-      //   ),
-      // ),
+    );
+  }
+
+  static AppBar smallAppBar(
+    BuildContext context, {
+    String title = '',
+  }) {
+    return AppBar(
+      centerTitle: true,
+      elevation: 0,
+      backgroundColor: AppColors.red,
+      title: Text(
+        title,
+        style: const TextStyle(
+          color: AppColors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:pokemon_challenge/domain/entities/stats.dart';
 import 'package:pokemon_challenge/domain/entities/types.dart';
 
@@ -8,6 +10,7 @@ class Pokemon {
   final String imageUrl;
   final double weight;
   final double height;
+  final double baseExperience;
   final bool isFavorite;
   final String color;
   final List<String> eggGroups;
@@ -23,6 +26,7 @@ class Pokemon {
     required this.imageUrl,
     required this.weight,
     required this.height,
+    required this.baseExperience,
     required this.isFavorite,
     required this.color,
     required this.eggGroups,
