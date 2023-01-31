@@ -1,16 +1,37 @@
-# pokemon_challenge
 
-A new Flutter project.
+# PokéChallenge 
 
-## Getting Started
+Uma aplicação desenvolvida para compor um desafio técnico inicia no dia 30/01/23 com prazo final para o dia 02/02/23.
 
-This project is a starting point for a Flutter application.
+Desafio consiste em desenvolver uma aplicação em Flutter para visualizar uma lista de Pokémons.
 
-A few resources to get you started if this is your first Flutter project:
+API a ser utilizada: https://pokeapi.co/
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+### Requisitos obrigatórios:
+
+- [ ]  Exibir lista de Pokemons com fotos
+- [ ]  Detalhar Pokemon com todos os itens do endpoint
+- [ ]  Utilizar Hive para armazenar Pokemons Favoritos
+- [ ]  Exibir aba para Pokemons favoritados
+- [ ]  Permitir remover dos favoritos
+- [ ]  Manter o código limpo e de fácil compreensão
+- [ ]  Layout do app e responsividade
+- [ ]  Usar um gerenciamento de estados
+- [ ]  Utilizar Arquitetura Limpa
+
+### Diferenciais:
+
+- [ ]  Adicionar uma Splash Screen
+- [ ]  Adicionar AppBar com ícone do aplicativo
+- [ ]  Utilizar paginação de 5 em 5
+- [ ]  Testes unitários
+- [ ]  Tratamento de erros
+
+## Autor
+
+[Kemberlly Rocha](https://www.linkedin.com/in/kemberllyrochasilva/)
+
