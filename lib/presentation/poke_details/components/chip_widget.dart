@@ -37,7 +37,7 @@ class ChipWidget extends StatelessWidget {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
             ),
           ),
           if (tag.value != null) const SizedBox(width: 10),

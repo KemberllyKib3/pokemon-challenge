@@ -56,8 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const BottomNavigationBarItem(
             icon: Icon(
-              Icons.star_outline_rounded,
-              size: 30,
+              Icons.favorite_outline_rounded,
+              size: 29,
             ),
             label: 'Favorites',
           ),

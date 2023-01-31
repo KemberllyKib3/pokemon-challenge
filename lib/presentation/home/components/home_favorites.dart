@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_challenge/domain/entities/entities.dart';
+import 'package:pokemon_challenge/injector.dart';
+import 'package:pokemon_challenge/presentation/home/bloc/home.dart';
+import 'package:pokemon_challenge/presentation/poke_details/bloc/poke_details.dart';
 import 'package:pokemon_challenge/presentation/poke_details/poke_details_screen.dart';
 import 'package:pokemon_challenge/shared/widgets/custom_card_widget.dart';
+import 'package:pokemon_challenge/shared/widgets/widgets_functions.dart';
 
 class HomeFavorites extends StatefulWidget {
   const HomeFavorites({Key? key}) : super(key: key);
@@ -12,40 +17,65 @@ class HomeFavorites extends StatefulWidget {
 
 class _HomeFavoritesState extends State<HomeFavorites> {
   @override
+  void initState() {
+    BlocProvider.of<HomeBloc>(context).add(HomeFavoriteEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Favorites',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 21,
-              fontWeight: FontWeight.bold,
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (state.isFailure) {
+          return Center(
+            child: Text(state.error!),
+          );
+        }
+
+        return SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Favorites',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: state.pokemons!.map(
+                    (pokemon) {
+                      return CustomCardWidget(
+                        pokemon: pokemon,
+                        onTap: () => WidgetsFunctions.push(
+                          context,
+                          (context) => BlocProvider<PokeDetailsBloc>(
+                            create: (context) => getIt<PokeDetailsBloc>(),
+                            child: PokeDetailsScreen(id: pokemon.id),
+                          ),
+                        ),
+                      );
+                    },
+                  ).toList(),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 10),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: listPokemon.map(
-              (pokemon) {
-                return CustomCardWidget(
-                  pokemon: pokemon,
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PokeDetailsScreen(pokemon: pokemon),
-                    ),
-                  ),
-                );
-              },
-            ).toList(),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

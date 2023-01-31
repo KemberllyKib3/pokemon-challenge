@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:pokemon_challenge/domain/entities/pokemon.dart';
 import 'package:pokemon_challenge/shared/app_colors.dart';
+import 'package:pokemon_challenge/shared/helpers/helper_string.dart';
 import 'package:pokemon_challenge/shared/shared.dart';
 
 class CustomCardWidget extends StatelessWidget {
@@ -57,11 +58,16 @@ class CustomCardWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (pokemon.isFavorite)
-                    const Padding(
-                      padding: EdgeInsets.only(top: 5, right: 5),
-                      child: Icon(
-                        Icons.star,
+                  if (pokemon.isFavorite ?? false)
+                    Container(
+                      margin: const EdgeInsets.only(top: 5, right: 5),
+                      padding: const EdgeInsets.fromLTRB(2, 2, 2, 0),
+                      decoration: const BoxDecoration(
+                        color: AppColors.red,
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      ),
+                      child: const Icon(
+                        Icons.favorite_rounded,
                         color: AppColors.yellow,
                       ),
                     ),
@@ -70,7 +76,7 @@ class CustomCardWidget extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             Text(
-              pokemon.name,
+              pokemon.name.capitalize(),
               style: const TextStyle(
                 fontSize: 18,
                 overflow: TextOverflow.ellipsis,

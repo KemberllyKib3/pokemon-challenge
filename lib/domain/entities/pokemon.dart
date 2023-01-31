@@ -5,36 +5,36 @@ import 'package:pokemon_challenge/domain/entities/stats.dart';
 import 'package:pokemon_challenge/domain/entities/types.dart';
 
 class Pokemon {
-  final int id;
-  final String name;
-  final String imageUrl;
-  final double weight;
-  final double height;
-  final double baseExperience;
-  final bool isFavorite;
-  final String color;
-  final List<String> eggGroups;
-  final List<Types> types;
-  final List<Stats> stats;
-  final List<String> abilities;
-  final List<String> moves;
-  final List<String> habitats;
+  int id;
+  String name;
+  String imageUrl;
+  int? weight;
+  int? height;
+  int? baseExperience;
+  bool? isFavorite;
+  String? color;
+  List<String>? eggGroups;
+  List<Types>? types;
+  List<Stats>? stats;
+  List<String>? abilities;
+  List<String>? moves;
+  List<String>? habitats;
 
   Pokemon({
     required this.id,
     required this.name,
     required this.imageUrl,
-    required this.weight,
-    required this.height,
-    required this.baseExperience,
-    required this.isFavorite,
-    required this.color,
-    required this.eggGroups,
-    required this.types,
-    required this.stats,
-    required this.abilities,
-    required this.moves,
-    required this.habitats,
+    this.weight,
+    this.height,
+    this.baseExperience,
+    this.isFavorite,
+    this.color,
+    this.eggGroups,
+    this.types,
+    this.stats,
+    this.abilities,
+    this.moves,
+    this.habitats,
   });
 
   Color get getColor {

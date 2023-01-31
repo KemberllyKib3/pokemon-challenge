@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_challenge/domain/entities/entities.dart';
+import 'package:pokemon_challenge/injector.dart';
+import 'package:pokemon_challenge/presentation/poke_details/bloc/poke_details.dart';
 import 'package:pokemon_challenge/presentation/poke_details/poke_details_screen.dart';
 
 import 'package:pokemon_challenge/shared/shared.dart';
@@ -54,11 +57,11 @@ class _ResultScreenState extends State<ResultScreen> {
                     .map(
                       (pokemon) => CustomCardWidget(
                         pokemon: pokemon,
-                        onTap: () => Navigator.push(
+                        onTap: () => WidgetsFunctions.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                PokeDetailsScreen(pokemon: pokemon),
+                          (context) => BlocProvider<PokeDetailsBloc>(
+                            create: (context) => getIt<PokeDetailsBloc>(),
+                            child: PokeDetailsScreen(id: pokemon.id),
                           ),
                         ),
                       ),

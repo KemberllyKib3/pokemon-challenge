@@ -13,7 +13,7 @@ API a ser utilizada: https://pokeapi.co/
 
 ### Requisitos obrigatórios:
 
-- [ ]  Exibir lista de Pokemons com fotos
+- [x]  Exibir lista de Pokemons com fotos
 - [ ]  Detalhar Pokemon com todos os itens do endpoint
 - [ ]  Utilizar Hive para armazenar Pokemons Favoritos
 - [ ]  Exibir aba para Pokemons favoritados
@@ -27,13 +27,14 @@ API a ser utilizada: https://pokeapi.co/
 
 - [x]  Adicionar uma Splash Screen
 - [x]  Adicionar AppBar com ícone do aplicativo
-- [ ]  Utilizar paginação de 5 em 5
+- [x]  Utilizar paginação de 5 em 5
 - [ ]  Testes unitários
 - [ ]  Tratamento de erros
 
 ### Extras:
 
 - [x]  Launcher Icon adaptativo
+- [x]  Campo de busca
 
 ## Autor
 
