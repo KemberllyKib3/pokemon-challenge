@@ -10,6 +10,11 @@ ThemeData buildTheme() {
       color: AppColors.white,
       size: 25,
     ),
+    listTileTheme: const ListTileThemeData(
+      horizontalTitleGap: 0,
+      iconColor: AppColors.gray,
+      tileColor: AppColors.white,
+    ),
     scaffoldBackgroundColor: AppColors.background,
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );

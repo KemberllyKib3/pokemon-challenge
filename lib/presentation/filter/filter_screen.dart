@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_challenge/injector.dart';
 import 'package:pokemon_challenge/presentation/filter/bloc/filter.dart';
+import 'package:pokemon_challenge/presentation/filter/components/custom_filter_button.dart';
 import 'package:pokemon_challenge/presentation/filter/components/result_screen.dart';
-import 'package:pokemon_challenge/shared/helpers/helper_enums.dart';
 
 import 'package:pokemon_challenge/shared/shared.dart';
 import 'package:pokemon_challenge/shared/widgets/widgets_functions.dart';
@@ -21,6 +21,8 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
+  final controller = ScrollController();
+
   @override
   void initState() {
     BlocProvider.of<FilterBloc>(context)
@@ -35,18 +37,15 @@ class _FilterScreenState extends State<FilterScreen> {
       body: BlocBuilder<FilterBloc, FilterState>(
         builder: (context, state) {
           if (state.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return WidgetsFunctions.showLoading(context);
           }
 
           if (state.isFailure) {
-            return Center(
-              child: Text(state.error!),
-            );
+            WidgetsFunctions.showSnackError(context, message: state.error!);
           }
 
           return SingleChildScrollView(
+            controller: controller,
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -61,42 +60,31 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Wrap(
-                      runSpacing: 10,
-                      spacing: 10,
-                      alignment: WrapAlignment.start,
-                      children: state.items!
-                          .map(
-                            (search) => InkWell(
-                              onTap: () => WidgetsFunctions.push(
-                                context,
-                                (context) => BlocProvider<FilterBloc>(
-                                  create: (context) => getIt<FilterBloc>(),
-                                  child: ResultScreen(
-                                    typeFilter: widget.typeFilter,
-                                    search: search,
-                                  ),
-                                ),
-                              ),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 20),
-                                decoration: BoxDecoration(
-                                  color: HelperEnums.color(search),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  search.toUpperCase(),
-                                  style: const TextStyle(
-                                    color: AppColors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                  GridView.count(
+                    controller: controller,
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 2.5,
+                    children: state.items!
+                        .map(
+                          (text) => CustomFilterButton(
+                            text: text,
+                            onTap: () => WidgetsFunctions.push(
+                              context,
+                              (context) => BlocProvider<FilterBloc>(
+                                create: (context) => getIt<FilterBloc>(),
+                                child: ResultScreen(
+                                  typeFilter: widget.typeFilter,
+                                  search: text,
                                 ),
                               ),
                             ),
-                          )
-                          .toList())
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ],
               ),
             ),

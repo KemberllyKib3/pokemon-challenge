@@ -1,34 +1,37 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:pokemon_challenge/presentation/home/components/custom_drawer.dart';
 import 'package:pokemon_challenge/presentation/home/components/home_favorites.dart';
 import 'package:pokemon_challenge/presentation/home/components/home_pokemons.dart';
 import 'package:pokemon_challenge/shared/shared.dart';
 import 'package:pokemon_challenge/shared/widgets/widgets_functions.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final int? initialScreen;
+
+  const HomeScreen({
+    Key? key,
+    this.initialScreen = 0,
+  }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
+  late int _currentIndex;
+  @override
+  void initState() {
+    _currentIndex = widget.initialScreen!;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WidgetsFunctions.bigAppBar(
-        context,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu_rounded,
-            color: AppColors.white,
-            size: 30,
-          ),
-          onPressed: () {},
-        ),
-      ),
+      appBar: WidgetsFunctions.bigAppBar(context),
       body: [
         const HomePokemons(),
         const HomeFavorites(),
@@ -63,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      
+      drawer: const CustomDrawer(),
     );
   }
 }

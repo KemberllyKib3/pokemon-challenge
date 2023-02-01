@@ -44,7 +44,7 @@ API a ser utilizada: https://pokeapi.co/
 - [x]  Launcher Icon adaptativo
 - [x]  Campo de busca
 - [x]  Filtros 
-- [ ]  Drawer 
+- [x]  Drawer 
 
 ## Autor
 

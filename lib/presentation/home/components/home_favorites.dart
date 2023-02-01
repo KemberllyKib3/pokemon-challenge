@@ -27,19 +27,16 @@ class _HomeFavoritesState extends State<HomeFavorites> {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         if (state.isLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return WidgetsFunctions.showLoading(context);
         }
 
         if (state.isFailure) {
-          return Center(
-            child: Text(state.error!),
-          );
+          WidgetsFunctions.showSnackError(context, message: state.error!);
         }
 
         return SingleChildScrollView(
           child: Container(
+            width: double.infinity,
             padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,13 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:pokemon_challenge/domain/entities/entities.dart';
+import 'package:pokemon_challenge/injector.dart';
+import 'package:pokemon_challenge/presentation/filter/bloc/filter.dart';
+import 'package:pokemon_challenge/presentation/filter/components/result_screen.dart';
 import 'package:pokemon_challenge/presentation/poke_details/bloc/poke_details.dart';
+import 'package:pokemon_challenge/presentation/poke_details/components/base_information_widget.dart';
 import 'package:pokemon_challenge/presentation/poke_details/components/chip_widget.dart';
 import 'package:pokemon_challenge/presentation/poke_details/components/info_tags_scroll_widget.dart';
 import 'package:pokemon_challenge/presentation/poke_details/components/info_tags_wrap_widget.dart';
+import 'package:pokemon_challenge/presentation/poke_details/components/base_stats_widget.dart';
+import 'package:pokemon_challenge/presentation/poke_details/components/poke_image_widget.dart';
 import 'package:pokemon_challenge/shared/helpers/helper_enums.dart';
 import 'package:pokemon_challenge/shared/helpers/helper_string.dart';
 import 'package:pokemon_challenge/shared/shared.dart';
@@ -39,9 +44,17 @@ class _PokeDetailsBodyState extends State<PokeDetailsBody> {
             if (widget.pokemon.isFavorite!) {
               BlocProvider.of<PokeDetailsBloc>(context)
                   .add(UnmarkFavoriteEvent(widget.pokemon.id));
+              WidgetsFunctions.showToast(
+                "Removed from favorites",
+                typeMessage: TypeMessage.sucess,
+              );
             } else {
               BlocProvider.of<PokeDetailsBloc>(context)
                   .add(MarkFavoriteEvent(widget.pokemon.id));
+              WidgetsFunctions.showToast(
+                "Added to favorites",
+                typeMessage: TypeMessage.sucess,
+              );
             }
           },
           child: Icon(
@@ -56,48 +69,11 @@ class _PokeDetailsBodyState extends State<PokeDetailsBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AnimatedContainer(
-              height: isExpanded ? 380 : 200,
-              margin: const EdgeInsets.all(10),
-              duration: const Duration(milliseconds: 300),
-              decoration: BoxDecoration(
-                color: widget.pokemon.getColor,
-                image: DecorationImage(
-                  onError: (_, __) => const Icon(
-                    Icons.error,
-                    color: AppColors.gray,
-                    size: 35,
-                  ),
-                  image: CachedNetworkImageProvider(
-                    widget.pokemon.imageUrl,
-                  ),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.black),
-              ),
-              alignment: Alignment.bottomRight,
-              child: Material(
-                color: Colors.transparent,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: InkWell(
-                    onTap: () => setState(() => isExpanded = !isExpanded),
-                    child: Ink(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                        color: AppColors.red,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Icon(
-                        Icons.open_in_full_rounded,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            PokeImageWidget(
+              imageUrl: widget.pokemon.imageUrl,
+              backgroundColor: widget.pokemon.getColor,
             ),
+            const SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -111,37 +87,14 @@ class _PokeDetailsBodyState extends State<PokeDetailsBody> {
                     ),
                   ),
                 ),
-                InfoTagsScrollWidget(
-                  title: "Information",
-                  tags: [
-                    Tag(
-                      title: "Height",
-                      value: widget.pokemon.height.toString(),
-                      color: AppColors.darkYellow,
-                    ),
-                    Tag(
-                      title: "Weight",
-                      value: widget.pokemon.weight.toString(),
-                      color: AppColors.darkYellow,
-                    ),
-                    Tag(
-                      title: "Base Exp",
-                      value: widget.pokemon.baseExperience.toString(),
-                      color: AppColors.darkYellow,
-                    ),
-                  ],
+                BaseInformationWidget(
+                  baseExperience: widget.pokemon.baseExperience!,
+                  height: widget.pokemon.height!,
+                  weight: widget.pokemon.weight!,
                 ),
-                InfoTagsWrapWidget(
+                BaseStatsWidget(
                   title: "Base stats",
-                  tags: widget.pokemon.stats!
-                      .map(
-                        (stat) => Tag(
-                          title: stat.initials,
-                          value: stat.stat.toString(),
-                          color: AppColors.darkRed,
-                        ),
-                      )
-                      .toList(),
+                  stats: widget.pokemon.stats!,
                 ),
                 InfoTagsScrollWidget(
                   title: "Abilities",
@@ -160,7 +113,38 @@ class _PokeDetailsBodyState extends State<PokeDetailsBody> {
                       .map(
                         (type) => Tag(
                           title: type.name,
+                          onTap: () => WidgetsFunctions.push(
+                            context,
+                            (context) => BlocProvider<FilterBloc>(
+                              create: (context) => getIt<FilterBloc>(),
+                              child: ResultScreen(
+                                typeFilter: TypeFilter.type,
+                                search: type.name,
+                              ),
+                            ),
+                          ),
                           color: HelperEnums.color(type.name),
+                        ),
+                      )
+                      .toList(),
+                ),
+                InfoTagsWrapWidget(
+                  title: "Habitat",
+                  tags: widget.pokemon.habitats!
+                      .map(
+                        (habitat) => Tag(
+                          title: habitat,
+                          color: AppColors.darkYellow,
+                          onTap: () => WidgetsFunctions.push(
+                            context,
+                            (context) => BlocProvider<FilterBloc>(
+                              create: (context) => getIt<FilterBloc>(),
+                              child: ResultScreen(
+                                typeFilter: TypeFilter.habitat,
+                                search: habitat,
+                              ),
+                            ),
+                          ),
                         ),
                       )
                       .toList(),
@@ -177,12 +161,12 @@ class _PokeDetailsBodyState extends State<PokeDetailsBody> {
                       .toList(),
                 ),
                 InfoTagsWrapWidget(
-                  title: "Habitat",
-                  tags: widget.pokemon.habitats!
+                  title: "Moves",
+                  tags: widget.pokemon.moves!
                       .map(
-                        (habitat) => Tag(
-                          title: habitat,
-                          color: AppColors.darkYellow,
+                        (move) => Tag(
+                          title: move,
+                          color: AppColors.blue,
                         ),
                       )
                       .toList(),

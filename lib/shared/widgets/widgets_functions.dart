@@ -2,7 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pokemon_challenge/shared/helpers/helper_enums.dart';
 import 'package:pokemon_challenge/shared/shared.dart';
+import 'package:pokemon_challenge/shared/widgets/custom_snack_bar_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WidgetsFunctions {
   static AppBar bigAppBar(
@@ -15,6 +19,7 @@ class WidgetsFunctions {
       toolbarHeight: 120,
       backgroundColor: AppColors.red,
       leading: leading,
+      iconTheme: const IconThemeData(color: AppColors.white, size: 30),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -68,20 +73,60 @@ class WidgetsFunctions {
     );
   }
 
-  // static void showToastAviso(String msg) {
-  //   Fluttertoast.showToast(
-  //     msg: msg,
-  //     toastLength: Toast.LENGTH_LONG,
-  //     gravity: ToastGravity.CENTER,
-  //     fontSize: 12.0,
-  //     backgroundColor: AppColors.purple,
-  //   );
-  // }
+  static void showToast(String msg,
+      {TypeMessage? typeMessage = TypeMessage.info}) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      fontSize: 13,
+      backgroundColor: HelperEnums.colorTypeMessage(typeMessage!),
+    );
+  }
 
-  // static void showSnackError(
-  //   BuildContext context, {
-  //   required String message,
-  // }) {
-  //   CustomSnackBar.showSnack(context, message, TypeMessage.error);
-  // }
+  static void openUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $url';
+    }
+  }
+
+  static void showSnackError(
+    BuildContext context, {
+    required String message,
+  }) {
+    CustomSnackBarWidget.showSnack(
+      context,
+      message,
+      TypeMessage.error,
+    );
+  }
+
+  static Widget showLoading(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(50),
+      color: Colors.white,
+      width: double.maxFinite,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          SizedBox.square(
+            dimension: 25,
+            child: CircularProgressIndicator(
+              strokeWidth: 1.5,
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.blue),
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            "Wait a moment...",
+            style: TextStyle(
+              color: AppColors.gray,
+              fontSize: 15,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

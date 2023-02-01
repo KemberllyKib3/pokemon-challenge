@@ -53,11 +53,24 @@ class HelperEnums {
       case 'fairy':
         return Colors.pink[100]!;
       case 'unknown':
-        return Colors.grey[300]!;
+        return Colors.grey[500]!;
       case 'shadow':
         return Colors.grey[900]!;
       default:
         return AppColors.red;
+    }
+  }
+
+  static Color colorTypeMessage(TypeMessage typeMessage) {
+    switch (typeMessage) {
+      case TypeMessage.sucess:
+        return AppColors.success;
+      case TypeMessage.info:
+        return AppColors.info;
+      case TypeMessage.warning:
+        return AppColors.warning;
+      case TypeMessage.error:
+        return AppColors.error;
     }
   }
 }

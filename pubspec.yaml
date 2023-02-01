@@ -22,6 +22,9 @@ dependencies:
   flutter_svg: ^1.1.6
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
+  url_launcher: ^6.1.8
+
+  fluttertoast: ^8.1.2
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +42,8 @@ dev_dependencies:
 
 # flutter pub run flutter_native_splash:create
 flutter_native_splash:
-  color: '#FFFFFF'
+  # color: '#FFFFFF'
+  background_image: "assets/launcher/back_splash.png"
   image: 'assets/launcher/splash.png'
   android_gravity: center
 

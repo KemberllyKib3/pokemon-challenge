@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_challenge/domain/usecases/filter_usecases.dart';
 import 'package:pokemon_challenge/presentation/filter/bloc/filter.dart';

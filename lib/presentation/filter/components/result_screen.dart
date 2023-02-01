@@ -41,15 +41,11 @@ class _ResultScreenState extends State<ResultScreen> {
       body: BlocBuilder<FilterBloc, FilterState>(
         builder: (context, state) {
           if (state.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return WidgetsFunctions.showLoading(context);
           }
 
           if (state.isFailure) {
-            return Center(
-              child: Text(state.error!),
-            );
+            WidgetsFunctions.showSnackError(context, message: state.error!);
           }
 
           return SingleChildScrollView(

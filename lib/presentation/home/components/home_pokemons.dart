@@ -11,7 +11,7 @@ import 'package:pokemon_challenge/presentation/poke_details/bloc/poke_details.da
 import 'package:pokemon_challenge/presentation/poke_details/poke_details_screen.dart';
 import 'package:pokemon_challenge/shared/shared.dart';
 import 'package:pokemon_challenge/shared/widgets/custom_card_widget.dart';
-import 'package:pokemon_challenge/shared/widgets/show_more_widget.dart';
+import 'package:pokemon_challenge/presentation/home/components/show_more_widget.dart';
 import 'package:pokemon_challenge/shared/widgets/widgets_functions.dart';
 
 class HomePokemons extends StatefulWidget {
@@ -36,15 +36,11 @@ class _HomePokemonsState extends State<HomePokemons> {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         if (state.isLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return WidgetsFunctions.showLoading(context);
         }
 
         if (state.isFailure) {
-          return Center(
-            child: Text(state.error!),
-          );
+          WidgetsFunctions.showSnackError(context, message: state.error!);
         }
 
         return SingleChildScrollView(
