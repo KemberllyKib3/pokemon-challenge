@@ -9,7 +9,7 @@ API a ser utilizada: https://pokeapi.co/
 
 
 <h4 align="center"> 
- 👨‍💻✅  Project finished Jan, 1st 🚀 Em análise...  🤓
+ 👨‍💻✅  Projeto finalizado em 1° de janeiro 🚀 Em análise...  🤓
 </h4>
 
 
