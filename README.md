@@ -11,11 +11,12 @@ API a ser utilizada: https://pokeapi.co/
 ## Design e Protótipo
 
 [Figma](https://www.figma.com/file/nvipmmFf1dbLYm5FZQQq2G/Pok%C3%A9Challenge?t=BckVDC80JfLKh3Up-6)
+ • 
 [Protótipo](https://www.figma.com/proto/nvipmmFf1dbLYm5FZQQq2G/Untitled?node-id=1%3A2&viewport=335%2C-86%2C0.31&scaling=scale-down&starting-point-node-id=5%3A63)
 
 
 <p align="center">
-  <img alt="Demo PokéChallenge" src="https://github.com/KemberllyKib3/pokemon-challenge/blob/main/demo%20pokechallenge.gif">
+  <img alt="Demo PokéChallenge" src="https://github.com/KemberllyKib3/pokemon-challenge/blob/main/demo-gif.gif">
 </p>
 
 
