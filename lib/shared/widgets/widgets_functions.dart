@@ -14,6 +14,7 @@ class WidgetsFunctions {
     IconButton? leading,
   }) {
     return AppBar(
+      key: const Key('bigAppBar'),
       centerTitle: true,
       elevation: 0,
       toolbarHeight: 120,

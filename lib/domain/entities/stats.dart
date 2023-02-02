@@ -6,7 +6,8 @@ class Stats {
   Stats({
     required this.title,
     required this.stat,
-  });
+  })  : assert(title.isNotEmpty),
+        assert(stat >= 0);
 
   String get initials {
     switch (title) {
