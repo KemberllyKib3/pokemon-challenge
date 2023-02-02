@@ -8,6 +8,11 @@ Desafio consiste em desenvolver uma aplicação em Flutter para visualizar uma l
 API a ser utilizada: https://pokeapi.co/
 
 
+<h4 align="center"> 
+ 👨‍💻✅  Projeto finalizado em 1° de janeiro 🚀 Em análise...  🤓
+</h4>
+
+
 ## Design e Protótipo
 
 [Figma](https://www.figma.com/file/nvipmmFf1dbLYm5FZQQq2G/Pok%C3%A9Challenge?t=BckVDC80JfLKh3Up-6)
