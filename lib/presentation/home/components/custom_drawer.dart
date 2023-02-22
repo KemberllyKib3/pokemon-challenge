@@ -7,7 +7,6 @@ import 'package:pokemon_challenge/presentation/filter/filter_screen.dart';
 import 'package:pokemon_challenge/presentation/home/home_screen.dart';
 import 'package:pokemon_challenge/shared/shared.dart';
 import 'package:pokemon_challenge/shared/widgets/widgets_functions.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);

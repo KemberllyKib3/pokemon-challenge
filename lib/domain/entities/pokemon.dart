@@ -24,10 +24,10 @@ class Pokemon {
     required this.id,
     required this.name,
     required this.imageUrl,
-    this.weight,
-    this.height,
-    this.baseExperience,
-    this.isFavorite,
+    this.weight = 0,
+    this.height = 0,
+    this.baseExperience = 0,
+    this.isFavorite = false,
     this.color,
     this.eggGroups,
     this.types,
@@ -35,7 +35,8 @@ class Pokemon {
     this.abilities,
     this.moves,
     this.habitats,
-  });
+  })  : assert(name.isNotEmpty),
+        assert(imageUrl.isNotEmpty);
 
   Color get getColor {
     switch (color) {
@@ -56,7 +57,7 @@ class Pokemon {
       case 'gray':
         return Colors.grey[300]!;
       default:
-        return Colors.grey[300]!;
+        return Colors.grey[400]!;
     }
   }
 }
